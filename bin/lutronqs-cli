@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import argparse
+import lutronqs
+import getpass
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--host', type=str, required=True, help='IP/Hostname of the Lutron QS Processor')
+    parser.add_argument('--user', type=str, required=True, help='Username for QS processor login.')
+    parser.add_argument('--pass', type=str, required=False, help='Password for QS processor login. Will be prompted for if not provided.')
+    parser.add_argument('--action', type=str, required=True, help='Action to perform, one of: getAreaScene|setAreaLevel|setAreaScene')
+    parser.add_argument('--iid', type=int, required=True, help='Integration ID of target area.')
+    parser.add_argument('--value', type=int, default=0, help='Value to set (default is 0)')
+    args = parser.parse_args()
+  
+    if args.pass:
+        pwd = args.pass
+    else:
+        pwd = getpass.getpass("Enter QS Processor Password")
+    lqs = lutronqs.LutronQS(args.host,args.user,pwd)
+
+    if(args.action == "getAreaScene"):
+        print(lqs.getAreaScene(args.iid))
+    else if(args.action == "setAreaLevel"):
+        lqs.setAreaLevel(args.iid, args.value)
+    else if(args.action == "setAreaScene"):
+        lqs.setAreaScene(args.iid, args.value)
+    else:
+        print("Invalid action: " + args.action)
+    
