@@ -1,4 +1,5 @@
-# lutronqs - A Python library for interfacing with Lutron QS devices via the Telnet integration protocol.
+# lutronqs
+A Python library for interfacing with Lutron QS devices via the Telnet integration protocol.
 
 # Tested Devices
  * Lutron Quantum lighting processor implementing revision H of the QS Telnet protocol
