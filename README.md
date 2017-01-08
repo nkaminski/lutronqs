@@ -38,3 +38,7 @@ Sets the area with integration ID equal to 'iid' to the scene specified by 'scen
 
        getAreaScene(iid,scene)
 Gets the current scene being displayed in the area with integration ID equal to 'iid'. Throws ConnectionError if the connection to the QS processor has been closed and ProcessorError if the iid is invalid or unassigned.
+
+# Acknowledgements
+
+Development of this library is sponsored by mHUB - http://www.mhubchicago.com/
