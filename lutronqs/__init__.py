@@ -65,7 +65,10 @@ class LutronQS:
     def close(self):
         self.run = False
         if(self._rxthread):
-            self._rxthread.join()
+            try:
+                self._rxthread.join()
+            except:
+                pass
         if(self._tc):
             self._tc.close()
  

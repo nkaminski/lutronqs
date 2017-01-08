@@ -18,8 +18,6 @@ setup(name='lutronqs',
         author_email='nashkaminski@kaminski.io',
         license='LGPLv3',
         packages=['lutronqs'],
-        install_requires=[
-        'telnetlib',
-        ],
+        install_requires=[],
         scripts=['bin/lutronqs-cli'],
         zip_safe=False)
