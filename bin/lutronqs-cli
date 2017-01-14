@@ -22,7 +22,9 @@ if __name__ == "__main__":
     lqs = lutronqs.LutronQS(args.host,args.user,pwd)
 
     if(args.action == "getAreaScene"):
-        print("Scene " + str(lqs.getAreaScene(args.iid)[1][2]))
+        print("Scene " + str(lqs.getAreaScene(args.iid)))
+    elif(args.action == "getAreaOccupancy"):
+        print("Occupancy state: " + str(lqs.getAreaOccupancy(args.iid)))
     elif(args.action == "setAreaLevel"):
         lqs.setAreaLevel(args.iid, args.value)
     elif(args.action == "setAreaScene"):

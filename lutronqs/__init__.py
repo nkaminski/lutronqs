@@ -14,7 +14,7 @@ class LutronQS:
         while(self.run):
             try:
                 data = self._tc.read_until(b"\r\n",1)
-            except telnetlib.NotConnectedError:
+            except telnetlib.EOFError:
                 self._return_data = None
                 self._wait_v = ""
                 self.run = False
@@ -80,7 +80,7 @@ class LutronQS:
             raise ConnectionError("Not connected to QS processor!")
         try:
             self._tc.write(data.encode('ascii') + b"\r\n")
-        except telnetlib.NotConnectedError:
+        except OSError:
             raise ConnectionError("Connection lost while sending command!")
     
     def _write_req(self,wverb,data):
@@ -90,7 +90,7 @@ class LutronQS:
         self._wait_e.clear()
         try: 
             self._tc.write(data.encode('ascii') + b"\r\n")
-        except telnetlib.NotConnectedError:
+        except EOFError:
             raise ConnectionError("Connection lost while sending command!")
 
         if self._wait_e.wait(5):
@@ -108,5 +108,14 @@ class LutronQS:
 
     def getAreaScene(self,iid):
         cmdstr = "?AREA,%d,6" % (iid)
-        return self._write_req("AREA",cmdstr)
+        return int(self._write_req("AREA",cmdstr)[1][2])
 
+    def getAreaOccupancy(self,iid):
+        cmdstr = "?AREA,%d,8" % (iid)
+        resp = int(self._write_req("AREA",cmdstr)[1][2])
+        if resp == 3:
+            return True
+        elif resp == 4:
+            return False
+        else:
+            raise ProcessorError("Unexpected value received from QS processor while reading occupancy state!")

@@ -18,7 +18,7 @@
         --password PASSWORD  Password for QS processor login. Will be prompted 
                        if not provided.
         --action ACTION      Action to perform, one of:
-                       getAreaScene|setAreaLevel|setAreaScene
+                       getAreaScene|getAreaOccupancy|setAreaLevel|setAreaScene
         --iid IID            Integration ID of target area.
         --value VALUE        Value to set, required only for setXXX commands (default is 0)
 
@@ -38,6 +38,9 @@ Sets the area with integration ID equal to 'iid' to the scene specified by 'scen
 
        getAreaScene(iid,scene)
 Gets the current scene being displayed in the area with integration ID equal to 'iid'. Throws ConnectionError if the connection to the QS processor has been closed and ProcessorError if the iid is invalid or unassigned.
+
+       getAreaOccupancy(iid)
+Gets the occupancy state (true/false) of the area specified by iid. Returns False if there is no occupancy sensing equipment in the area.
 
 # Acknowledgements
 
