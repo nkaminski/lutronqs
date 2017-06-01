@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='lutronqs',
-        version='0.2',
+        version='0.2.1',
         description='Implementation of the Lutron QS integration protocol.',
         long_description='Implementation and command line utility for interfacing with a subset of the integration features of Lutron QS lighting systems.',
         url='https://github.com/nkaminski/lutronqs',

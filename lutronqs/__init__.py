@@ -108,7 +108,12 @@ class LutronQS:
 
     def getAreaScene(self,iid):
         cmdstr = "?AREA,%d,6" % (iid)
-        return int(self._write_req("AREA",cmdstr)[1][2])
+        rv = self._write_req("AREA",cmdstr)[1][2]
+        try:
+            rv = int(rv)
+        except ValueError:
+            rv = "unknown"
+        return rv
 
     def getAreaOccupancy(self,iid):
         cmdstr = "?AREA,%d,8" % (iid)
